@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,13 +18,17 @@ import com.google.gson.Gson;
 import com.ken.test.R;
 import com.ken.test.activity.FirstActivity;
 import com.ken.test.adapter.MyAdaprer;
+
+import com.ken.test.adapter.MyGridAdapter;
+import com.ken.test.adapter.MyListAdapter;
 import com.ken.test.bean.FirstBean;
 import com.ken.test.utils.GlideImageLoader;
 import com.ken.test.view.FullyLinearLayoutManager;
+import com.ken.test.view.InnerGridView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.youth.banner.Banner;
-import com.youth.banner.view.BannerViewPager;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +46,9 @@ public class FragmentShow extends Fragment {
     private ArrayList<String> images;
     private Banner banner;
     private RecyclerView rv_show;
+    private ListView listView;
+    private InnerGridView gridView;
+
 
     @Nullable
     @Override
@@ -56,11 +65,15 @@ public class FragmentShow extends Fragment {
         super.onActivityCreated(savedInstanceState);
         banner = (Banner) view.findViewById(R.id.banner_show_fragment);
         rv_show = (RecyclerView) view.findViewById(R.id.rv_show_c);
+        listView = (ListView) view.findViewById(R.id.lv_show_c);
+
+
+
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity,FullyLinearLayoutManager.HORIZONTAL,false);
         rv_show.setNestedScrollingEnabled(false);
         //设置布局管理器
         rv_show.setLayoutManager(linearLayoutManager);
-
+        gridView = (InnerGridView) view.findViewById(R.id.gridView_show_c);
 
 
          //设置图片加载器
@@ -97,7 +110,13 @@ public class FragmentShow extends Fragment {
                 final List<FirstBean.DataBean.BestSellersBean> bestSellers = bean.getData().getBestSellers();
 
                 //设置适配器
-                rv_show.setAdapter(new MyAdaprer(activity,bestSellers));
+                 rv_show.setAdapter(new MyAdaprer(activity,bestSellers));
+                //设置listView的适配器
+                final List<FirstBean.DataBean.SubjectsBean> subjects = bean.getData().getSubjects();
+                listView.setAdapter(new MyListAdapter(activity,subjects));
+                //设置gridView的适配器
+                final List<FirstBean.DataBean.DefaultGoodsListBean> listBeen = bean.getData().getDefaultGoodsList();
+                gridView.setAdapter(new MyGridAdapter(activity,listBeen));
             }
         });
 

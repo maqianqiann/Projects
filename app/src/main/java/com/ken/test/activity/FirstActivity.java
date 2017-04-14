@@ -3,6 +3,7 @@ package com.ken.test.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import com.ken.test.fragment.FragmentStyle;
 public class FirstActivity extends AppCompatActivity {
 
     private FrameLayout frameLayout;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class FirstActivity extends AppCompatActivity {
         frameLayout = (FrameLayout) findViewById(R.id.frame_first);
 
         //获得Frame的管理者
-        FragmentManager fragmentManager=getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         //开启事物
          FragmentTransaction beginTransaction = fragmentManager.beginTransaction();
         //进行添加
@@ -63,4 +65,15 @@ public class FirstActivity extends AppCompatActivity {
 
 
     }
+    //写个方法控制显示和隐藏
+    public void showAndHide(Fragment f1,Fragment f2,Fragment f3,Fragment f4,Fragment f5){
+        final FragmentTransaction beginTransaction = fragmentManager.beginTransaction();
+        beginTransaction.show(f1);
+        beginTransaction.hide(f2);
+        beginTransaction.hide(f3);
+        beginTransaction.hide(f4);
+        beginTransaction.hide(f5);
+        beginTransaction.commit();
+
+      }
 }
