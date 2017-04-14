@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ListView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/sliding_listView"
+    android:layout_weight="1"
+    ></ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="个人中心"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:id="@+id/sliding_person"
+            android:textColor="@color/colorMain"
+            />
+
+        <TextView
+            android:id="@+id/sliding_sc"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="品牌收藏"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colorMain"
+            />
+
+    </LinearLayout>
+</LinearLayout>
