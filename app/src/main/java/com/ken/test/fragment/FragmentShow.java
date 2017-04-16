@@ -28,6 +28,7 @@ import com.ken.test.view.InnerGridView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.youth.banner.Banner;
+import com.youth.banner.Transformer;
 
 
 import java.util.ArrayList;
@@ -74,8 +75,6 @@ public class FragmentShow extends Fragment {
         //设置布局管理器
         rv_show.setLayoutManager(linearLayoutManager);
         gridView = (InnerGridView) view.findViewById(R.id.gridView_show_c);
-
-
          //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
         //解析数据
@@ -99,12 +98,12 @@ public class FragmentShow extends Fragment {
                 final List<FirstBean.DataBean.Ad1Bean> list = bean.getData().getAd1();
                 images=new ArrayList<String>();
                 for (int i = 0; i <list.size() ; i++) {
-                      images.add(list.get(i).getImage());
+                    images.add(list.get(i).getImage());
                     Log.i("xxx",list.get(i).getImage());
                 }
-                Toast.makeText(activity, list.get(1).getImage(), Toast.LENGTH_SHORT).show();
                 //设置图片集合
                   banner.setImages(images);
+                banner.setBannerAnimation(Transformer.RotateDown);
                 //banner设置方法全部调用完毕时最后调用
                   banner.start();
                 final List<FirstBean.DataBean.BestSellersBean> bestSellers = bean.getData().getBestSellers();

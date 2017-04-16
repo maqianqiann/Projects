@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:background="#fff"
+android:gravity="center"
+    android:padding="1dp"
+    >
+
+
+    <ImageView
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:id="@+id/image_show_tt"
+        android:src="@mipmap/winning_bottle"
+        android:layout_centerInParent="true"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/image_show_tt"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_show_tt"
+        android:gravity="center"
+        android:text="标题"
+        android:textSize="18sp"
+        android:textColor="#000"
+
+        />
+    <TextView
+
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/title_show_tt"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/desc_show_tt"
+        android:text="描述"
+        android:textColor="#514b4b"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+
+        android:text="价格"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/desc_show_tt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/price_show_tt"
+        android:textColor="@color/colorMain"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        />
+</LinearLayout>

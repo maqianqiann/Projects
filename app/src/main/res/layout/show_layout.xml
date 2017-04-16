@@ -89,13 +89,26 @@
 
 
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="~~~春节热销~~~"
+            android:gravity="center"
+            />
 
     </LinearLayout>
        <android.support.v7.widget.RecyclerView
+           android:layout_marginTop="5dp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:id="@+id/rv_show_c"
            ></android.support.v7.widget.RecyclerView>
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="~~~优惠活动~~~"
+           android:gravity="center"
+           />
      <com.ken.test.view.InnerListView
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -103,11 +116,15 @@
 
          ></com.ken.test.view.InnerListView>
        <com.ken.test.view.InnerGridView
-           android:verticalSpacing="2dp"
-           android:horizontalSpacing="2dp"
+           android:verticalSpacing="3dp"
+           android:horizontalSpacing="3dp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:id="@+id/gridView_show_c"
+           android:numColumns="2"
+           android:gravity="center"
+
+           android:background="#DCDCDC"
            ></com.ken.test.view.InnerGridView>
    </LinearLayout>
 
