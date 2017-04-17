@@ -1,27 +1,28 @@
 package com.ken.test.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.ken.test.R;
 import com.ken.test.activity.FirstActivity;
-import com.ken.test.adapter.MyAdaprer;
-import com.ken.test.adapter.MyAdapterStyle;
+import com.ken.test.activity.GongInfoActivity;
+import com.ken.test.activity.InfoActivity;
 import com.ken.test.bean.MoBean;
 import com.ken.test.utils.MyCallBack;
 import com.ken.test.utils.OkHttpUtils;
+import com.ken.test.view.InnerGridView;
 
 import java.util.List;
 
@@ -33,7 +34,9 @@ public class FragmentStyle extends Fragment implements View.OnClickListener{
 
     private FirstActivity activity;
     private View view;
-    private RecyclerView rv;
+
+    private InnerGridView gridView;
+    private Intent intent;
 
     @Nullable
     @Override
@@ -59,7 +62,6 @@ public class FragmentStyle extends Fragment implements View.OnClickListener{
         ImageView sx_jmr= (ImageView) view.findViewById(R.id.type_sx_jiemianru);
         ImageView sx_other= (ImageView) view.findViewById(R.id.type_sx_other);
         ImageView sx_tz= (ImageView) view.findViewById(R.id.type_sx_taozhuang);
-        ImageView sx_man= (ImageView) view.findViewById(R.id.type_sx_man);
 
          sx_mm.setOnClickListener(this);
          sx_rfs.setOnClickListener(this);
@@ -67,7 +69,6 @@ public class FragmentStyle extends Fragment implements View.OnClickListener{
          sx_jmr.setOnClickListener(this);
          sx_other.setOnClickListener(this);
          sx_tz.setOnClickListener(this);
-         sx_man.setOnClickListener(this);
 
 
 
@@ -100,7 +101,7 @@ public class FragmentStyle extends Fragment implements View.OnClickListener{
         button_mg.setOnClickListener(this);
        //初始化数据
         getDatas();
-        rv = (RecyclerView) view.findViewById(R.id.type_recyclerView);
+        gridView = (InnerGridView) view.findViewById(R.id.type_GridView);
 
     }
 
@@ -109,44 +110,104 @@ public class FragmentStyle extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
          switch (v.getId()){
              case R.id.type_sx_mianmo:
-
-                 break;
+                 intent = new Intent(activity, InfoActivity.class);
+                  intent.putExtra("url","http://m.yunifang.com/yunifang/mobile/goods/getall?random=13819&encode=d58e53c4b9e24bd5ba276ba68f8e98ec&category_id=17");
+                  intent.putExtra("name","面膜");
+                 startActivityForResult(intent,0);
+                   break;
              case R.id.type_sx_runfushui:
+                 intent =  new Intent(activity, InfoActivity.class);
+                 intent.putExtra("url","http://m.yunifang.com/yunifang/mobile/goods/getall?random=91873&encode=68301f6ea0d6adcc0fee63bd21815d69&category_id=39");
+                 intent.putExtra("name","润肤水");
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_sx_runfuru:
+                 intent =  new Intent(activity, InfoActivity.class);
+                 intent.putExtra("url","http://m.yunifang.com/yunifang/mobile/goods/getall?random=91873&encode=68301f6ea0d6adcc0fee63bd21815d69&category_id=40");
+                 intent.putExtra("name","润肤乳");
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_sx_jiemianru:
+                 intent =  new Intent(activity, InfoActivity.class);
+                 intent.putExtra("url","http://m.yunifang.com/yunifang/mobile/goods/getall?random=91873&encode=68301f6ea0d6adcc0fee63bd21815d69&category_id=24");
+                 intent.putExtra("name","洁面乳");
+                 startActivityForResult(intent,0);
                  break;
               case R.id.type_sx_other:
+                  intent =  new Intent(activity, InfoActivity.class);
+                  intent.putExtra("url","http://m.yunifang.com/yunifang/mobile/goods/getall?random=91873&encode=68301f6ea0d6adcc0fee63bd21815d69&category_id=35");
+                  intent.putExtra("name","其他");
+                  startActivityForResult(intent,0);
                  break;
              case R.id.type_sx_taozhuang:
-                 break;
-             case R.id.type_sx_man:
+                 intent =  new Intent(activity, InfoActivity.class);
+                 intent.putExtra("url","http://m.yunifang.com/yunifang/mobile/goods/getall?random=91873&encode=68301f6ea0d6adcc0fee63bd21815d69&category_id=33");
+                 intent.putExtra("name","套装");
+                 startActivityForResult(intent,0);
+
                  break;
 
+
+
              case R.id.type_gx_bushui:
+
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",0);
+                 startActivityForResult(intent,0);
+
                  break;
              case R.id.type_gx_xiufu:
+
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",1);
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_gx_kongyou:
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",2);
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_gx_kangzhou:
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",3);
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_gx_meibai:
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",4);
+                 startActivityForResult(intent,0);
                  break;
 
 
              case R.id.type_fz_huihe:
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",0);
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_fz_zhongxing:
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",1);
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_fz_ganxing:
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",2);
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_fz_doudou:
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",2);
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_fz_youxing:
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",3);
+                 startActivityForResult(intent,0);
                  break;
              case R.id.type_fz_mingan:
+                 intent=new Intent(activity, GongInfoActivity.class);
+                 intent.putExtra("position",4);
+                 startActivityForResult(intent,0);
                  break;
 
          }
@@ -156,13 +217,73 @@ public class FragmentStyle extends Fragment implements View.OnClickListener{
         OkHttpUtils.getOkHttpObject(url, new MyCallBack() {
             @Override
             public void Ok(String s) {
-                 //进行解析
+                //进行解析
                 Gson gson=new Gson();
-                MoBean moBean = gson.fromJson(s, MoBean.class);
-                final List<MoBean.DataBean> list = moBean.getData();
-                rv.setLayoutManager(new StaggeredGridLayoutManager(2,RecyclerView.VERTICAL));
-                rv.setAdapter(new MyAdapterStyle(activity,list));
+                MoBean moBeen = gson.fromJson(s,MoBean.class);
+                final List<MoBean.DataBean.GoodsBriefBean> list = moBeen.getData().getGoodsBrief();
+                MyAdapter myAdapter = new MyAdapter(list);
+                 gridView.setAdapter(myAdapter);
+
               }
         });
+
+
+    }
+    private class MyAdapter extends BaseAdapter{
+       private  List<MoBean.DataBean.GoodsBriefBean> list;
+        public MyAdapter(List<MoBean.DataBean.GoodsBriefBean> list) {
+            this.list=list;
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder=null;
+             if(convertView==null){
+                convertView=View.inflate(activity,R.layout.item_show_two,null);
+              holder=new ViewHolder();
+                 holder.title = (TextView) convertView.findViewById(R.id.title_show_tt);
+                 holder.desc = (TextView)  convertView.findViewById(R.id.desc_show_tt);
+                 holder.im = (ImageView) convertView.findViewById(R.id.image_show_tt);
+                 holder.price = (TextView) convertView.findViewById(R.id.price_show_tt);
+                convertView.setTag(holder);
+             }else{
+                 holder= (ViewHolder) convertView.getTag();
+             }
+
+
+            holder.title.setText(list.get(position).getEfficacy());
+            holder.desc.setText(list.get(position).getGoods_name());
+            holder.price.setText(list.get(position).getShop_price()+"￥");
+            Glide.with(activity).load(list.get(position).getGoods_img()).into(holder.im);
+            return convertView;
+        }
+        class ViewHolder{
+            TextView title;
+            TextView desc;
+            ImageView im;
+            TextView price;
+
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

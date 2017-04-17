@@ -19,8 +19,6 @@ public abstract class MyCallBack implements Callback {
     @Override
     public void onFailure(Request request, IOException e) {
 
-
-
     }
 
     @Override

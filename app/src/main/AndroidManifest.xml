@@ -17,6 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.FirstActivity"/>
+        <activity android:name=".activity.InfoActivity"/>
+        <activity android:name=".activity.GongInfoActivity"/>
+        <activity android:name=".activity.LogActivity"/>
     </application>
 
 </manifest>

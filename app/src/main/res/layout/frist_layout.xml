@@ -16,7 +16,49 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:gravity="center"
-            ></LinearLayout>
+            >
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="首页"
+                android:id="@+id/s"
+
+                />
+            <TextView
+                android:id="@+id/f"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分类"
+
+                />
+            <TextView
+                android:id="@+id/m"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="美啦"
+
+                />
+            <TextView
+                android:id="@+id/ca"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="购物车"
+
+                />
+            <TextView
+                android:id="@+id/w"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的"
+
+                />
+
+        </LinearLayout>
 
 
     </RelativeLayout>

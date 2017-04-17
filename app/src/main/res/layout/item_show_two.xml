@@ -9,28 +9,28 @@ android:gravity="center"
 
 
     <ImageView
-        android:layout_width="135dp"
-        android:layout_height="135dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:id="@+id/image_show_tt"
         android:src="@mipmap/winning_bottle"
         android:layout_centerInParent="true"
         />
     <TextView
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/image_show_tt"
+        android:layout_below="@id/image_show_tt"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:id="@+id/title_show_tt"
         android:gravity="center"
         android:text="标题"
         android:textSize="18sp"
-        android:textColor="#000"
+        android:textColor="#363232"
 
         />
     <TextView
 
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/title_show_tt"
+        android:layout_below="@id/title_show_tt"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:id="@+id/desc_show_tt"
@@ -45,7 +45,7 @@ android:gravity="center"
 
         android:text="价格"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/desc_show_tt"
+        android:layout_below="@id/desc_show_tt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/price_show_tt"

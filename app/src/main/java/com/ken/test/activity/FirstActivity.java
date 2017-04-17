@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ken.test.R;
 import com.ken.test.fragment.FragmentBeatiful;
@@ -22,10 +23,15 @@ import com.ken.test.fragment.FragmentStyle;
  * Created by lenovo on 2017/4/13.
  */
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FrameLayout frameLayout;
     private FragmentManager fragmentManager;
+    private FragmentShow f_show;
+    private FragmentStyle f_style;
+    private FragmentBeatiful f_bea;
+    private FragmentCar f_car;
+    private FragmentMe f_me;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,22 +45,35 @@ public class FirstActivity extends AppCompatActivity {
        /* ImageView message= (ImageView) findViewById(R.id.message_im_first);
         ImageView ch_im= (ImageView) findViewById(R.id.ch_im_first);*/
         frameLayout = (FrameLayout) findViewById(R.id.frame_first);
+        TextView car = (TextView) findViewById(R.id.ca);
+        TextView s = (TextView) findViewById(R.id.s);
+        TextView m = (TextView) findViewById(R.id.m);
+        TextView f = (TextView) findViewById(R.id.f);
+        TextView wo = (TextView) findViewById(R.id.w);
+        car.setOnClickListener(this);
+        s.setOnClickListener(this);
+        m.setOnClickListener(this);
+        f.setOnClickListener(this);
+        wo.setOnClickListener(this);
+
+
+
 
         //获得Frame的管理者
         fragmentManager = getSupportFragmentManager();
         //开启事物
          FragmentTransaction beginTransaction = fragmentManager.beginTransaction();
         //进行添加
-        FragmentShow f_show=new FragmentShow();
-        FragmentStyle f_style=new FragmentStyle();
-        FragmentBeatiful f_bea=new FragmentBeatiful();
-        FragmentCar f_car=new FragmentCar();
-        FragmentMe f_me=new FragmentMe();
-        beginTransaction.add(R.id.frame_first,f_show);
-        beginTransaction.add(R.id.frame_first,f_style);
-        beginTransaction.add(R.id.frame_first,f_bea);
-        beginTransaction.add(R.id.frame_first,f_car);
-        beginTransaction.add(R.id.frame_first,f_me);
+        f_show = new FragmentShow();
+        f_style = new FragmentStyle();
+        f_bea = new FragmentBeatiful();
+        f_car = new FragmentCar();
+        f_me = new FragmentMe();
+        beginTransaction.add(R.id.frame_first, f_show);
+        beginTransaction.add(R.id.frame_first, f_style);
+        beginTransaction.add(R.id.frame_first, f_bea);
+        beginTransaction.add(R.id.frame_first, f_car);
+        beginTransaction.add(R.id.frame_first, f_me);
 
         beginTransaction.show(f_show);
         beginTransaction.hide(f_style);
@@ -76,4 +95,29 @@ public class FirstActivity extends AppCompatActivity {
         beginTransaction.commit();
 
       }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.s:
+                showAndHide(f_show,f_style,f_bea,f_car,f_me);
+                break;
+            case R.id.f:
+                showAndHide(f_style,f_show,f_bea,f_car,f_me);
+
+                break;
+            case R.id.m:
+                showAndHide(f_bea,f_show,f_style,f_car,f_me);
+
+                break;
+            case R.id.ca:
+                showAndHide(f_car,f_show,f_style,f_bea,f_me);
+
+                break;
+            case R.id.w:
+                showAndHide(f_me,f_show,f_style,f_bea,f_car);
+
+                break;
+        }
+    }
 }

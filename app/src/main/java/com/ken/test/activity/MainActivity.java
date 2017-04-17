@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements Animator.Animator
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                handler.removeCallbacksAndMessages(null);
                 startActivity(new Intent(MainActivity.this,FirstActivity.class));
                 overridePendingTransition(R.anim.start_anim,R.anim.back_anim);
 
