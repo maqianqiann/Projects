@@ -1,20 +1,236 @@
 package com.ken.test.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.ken.test.R;
+import com.ken.test.activity.CastActivity;
+import com.ken.test.activity.FirstActivity;
+import com.ken.test.activity.LogActivity;
+import com.ken.test.bean.GoodsBean;
+import com.ken.test.bean.GouwucheBean;
+import com.ken.test.view.InnerListView;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by lenovo on 2017/4/13.
  */
 
-public class FragmentCar extends Fragment {
+public class FragmentCar extends Fragment implements View.OnClickListener{
+
+    private View view;
+    private FirstActivity activity;
+    private CheckBox cb_all;
+    private TextView price_all;
+    private TextView js_all;
+    private ListView listView;
+
+    private Map<String, Boolean> map;
+    private List<GoodsBean.CartItemListBean> list;
+    private RelativeLayout rel_car1;
+    private RelativeLayout rel_car2;
+
+    private ArrayList<GouwucheBean.CartItemList> cartItemList1;
+    private GouwucheBean bean;
+    private MyAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        view = inflater.inflate(R.layout.car_layout,null);
+        activity = (FirstActivity) getActivity();
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //判断登陆的状态
+
+        Button guang= (Button) view.findViewById(R.id.button_guang_car);
+
+        rel_car1 = (RelativeLayout) view.findViewById(R.id.rel_car1);
+        rel_car2 = (RelativeLayout) view.findViewById(R.id.rel_car2);
+
+
+        //获得全选的框
+        cb_all = (CheckBox) view.findViewById(R.id.f3_box);
+        price_all = (TextView) view.findViewById(R.id.f3_price);
+        js_all = (TextView) view.findViewById(R.id.f3_jiesuan);
+        listView = (ListView) view.findViewById(R.id.f3_listView_car);
+
+        guang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(activity,FirstActivity.class);
+                startActivity(in);
+
+            }
+        });
+
+        if(LogActivity.state==true){
+            questDatas(64);
+         }
+
+        //设置条目的点击事件
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+            }
+        });
+        //设置cb的点击事件
+        cb_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(cartItemList1!=null){
+                    for (int i = 0; i <cartItemList1.size() ; i++) {
+                        cartItemList1.get(i).setFlag(true);
+                        adapter.notifyDataSetChanged();//刷新适配器
+                    }
+                }
+
+            }
+        });
+   }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(LogActivity.state==true){
+            questDatas(64);
+        }
+
+    }
+
+    public boolean setSelect(){
+    /*    Set<Map.Entry<String, Boolean>> set = map.entrySet();
+        Iterator<Map.Entry<String, Boolean>> iterator = set.iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, Boolean> next = iterator.next();
+            if(!next.getValue()){
+                //如果有一个为false则all就为false
+                return false;
+
+            }
+        }*/
+        return true;
+    }
+
+    //写个请求的方法
+    public void  questDatas(int id){
+        String url="http://169.254.94.62:8080/bullking1/cart?userID="+id;
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.get(activity, url, new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                    }
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        Gson gson=new Gson();
+                        Log.i("xxx",responseString);
+                        bean = gson.fromJson(responseString, GouwucheBean.class);
+                        cartItemList1 = bean.getCartItemList();
+                        if(cartItemList1!=null){
+                            rel_car1.setVisibility(View.GONE);
+                            rel_car2.setVisibility(View.VISIBLE);
+                            //设置数据
+                            adapter = new MyAdapter(cartItemList1);
+                            listView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.f3_jiesuan:
+                Intent in=new Intent(activity, CastActivity.class);
+                //将订单信息传过去
+                startActivity(in);
+
+                break;
+
+        }
+    }
+
+    private class MyAdapter extends BaseAdapter{
+        ArrayList<GouwucheBean.CartItemList> cartItemList;
+        public MyAdapter(ArrayList<GouwucheBean.CartItemList> cartItemList) {
+            this.cartItemList=cartItemList;
+        }
+
+        @Override
+        public int getCount() {
+            return cartItemList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return cartItemList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            convertView=View.inflate(activity,R.layout.car_list_layout,null);
+            ImageView im= (ImageView) convertView.findViewById(R.id.im_car_list);
+            TextView title= (TextView) convertView.findViewById(R.id.title_car_list);
+            TextView price= (TextView) convertView.findViewById(R.id.price_car_list);
+            CheckBox cb= (CheckBox) convertView.findViewById(R.id.cb_car_list);
+
+            //设置数据
+            title.setText(cartItemList.get(position).getName());
+            price.setText(cartItemList.get(position).getPrice()+"￥");
+            Glide.with(activity).load(cartItemList.get(position).getPic()).into(im);
+            cb.setChecked(cartItemList1.get(position).getFlag());
+
+            //设置点击事件
+            cb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   cartItemList.get(position).setFlag(true);
+                    adapter.notifyDataSetChanged();
+                }
+            });
+
+            return convertView;
+        }
     }
 }

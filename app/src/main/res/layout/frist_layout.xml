@@ -3,65 +3,95 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+
+    <FrameLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <FrameLayout
+        android:layout_height="wrap_content"
+        android:id="@+id/frame_first"
+        ></FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/rg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/frame_first"
-            ></FrameLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
+            android:layout_height="53dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
             >
-            <TextView
+
+            <RadioButton
+                android:id="@+id/home_page"
+                android:layout_width="0dp"
+
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/home_rb_shouye_select"
+                android:gravity="center"
                 android:text="首页"
-                android:id="@+id/s"
+                android:textColor="@drawable/home_rb_text_select"/>
 
-                />
-            <TextView
-                android:id="@+id/f"
+            <RadioButton
+                android:layout_marginTop="3dp"
+                android:id="@+id/classify"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/home_rb_fenlei_select"
+                android:gravity="center"
                 android:text="分类"
+                android:textColor="@drawable/home_rb_text_select"/>
 
-                />
-            <TextView
-                android:id="@+id/m"
+            <RadioButton
+                android:layout_marginTop="13dp"
+                android:id="@+id/good"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/home_rb_meila_select"
+                android:gravity="center"
                 android:text="美啦"
+                android:textColor="@drawable/home_rb_text_select"/>
 
-                />
-            <TextView
-                android:id="@+id/ca"
+            <RadioButton
+                android:layout_marginTop="2dp"
+
+                android:id="@+id/shop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/home_rb_gouwuche_select"
+                android:gravity="center"
                 android:text="购物车"
+                android:textColor="@drawable/home_rb_text_select"/>
 
-                />
-            <TextView
-                android:id="@+id/w"
+            <RadioButton
+                android:layout_marginTop="2dp"
+
+                android:id="@+id/my"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/home_rb_wode_select"
+                android:gravity="center"
                 android:text="我的"
+                android:textColor="@drawable/home_rb_text_select"/>
+        </RadioGroup>
+</LinearLayout>
 
-                />
-
-        </LinearLayout>
 
 
-    </RelativeLayout>
 
 
 </LinearLayout>

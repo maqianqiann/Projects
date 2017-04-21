@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rel_car2"
+         android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+
+            android:id="@+id/f3_xiang"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/f3_listView_car">
+
+            </ListView>
+
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:button="@drawable/select_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/f3_box"
+                        />
+                    <TextView
+                        android:id="@+id/f3_all"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="全选"
+                        android:textSize="20dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_marginLeft="50dp"
+                        android:textColor="@color/colorMain"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总计 ：￥"
+                        android:textSize="20dp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/f3_price"
+                            android:textColor="@color/colorMain"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1725.5"
+                            android:textSize="20dp"
+                            />
+
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/f3_jiesuan"
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/log_r_shape"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="结算"
+                        android:textSize="18dp"
+
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rel_car1"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/shopping_trolley_empty"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="150dp"
+            android:id="@+id/im_car"
+            />
+        <TextView
+            android:id="@+id/text_car"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/im_car"
+            android:layout_centerHorizontal="true"
+            android:text="购物车还是空的哦，快去逛逛吧"
+            />
+        <Button
+            android:id="@+id/button_guang_car"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:background="@drawable/log_r_shape"
+            android:layout_below="@id/text_car"
+            android:layout_centerHorizontal="true"
+            android:text="逛一逛"
+            android:textColor="#fff"
+            android:layout_marginTop="10dp"
+
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

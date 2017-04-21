@@ -1,6 +1,7 @@
 package com.ken.test.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ken.test.R;
 import com.ken.test.activity.FirstActivity;
+import com.ken.test.activity.ShopActivity;
 import com.ken.test.bean.FirstBean;
 import com.ken.test.bean.MoBean;
 
@@ -22,7 +24,7 @@ import java.util.List;
 public class MyAdaprer extends RecyclerView.Adapter<MyAdaprer.MyViewHolder> {
     private Context context;
     private List<FirstBean.DataBean.BestSellersBean> bestSellers;
-
+    private String url="http://m.yunifang.com/yunifang/mobile/home?random=84831&encode=9dd34239798e8cb22bf99a75d1882447";
     public MyAdaprer(Context context, List<FirstBean.DataBean.BestSellersBean> bestSellers) {
         this.context = context;
         this.bestSellers = bestSellers;
@@ -49,7 +51,6 @@ public class MyAdaprer extends RecyclerView.Adapter<MyAdaprer.MyViewHolder> {
         return bestSellers.get(0).getGoodsList().size();
     }
 
-
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         private final ImageView image;
@@ -60,7 +61,16 @@ public class MyAdaprer extends RecyclerView.Adapter<MyAdaprer.MyViewHolder> {
             image = (ImageView) itemView.findViewById(R.id.image_show_item);
             title = (TextView) itemView.findViewById(R.id.title_show_item);
             price = (TextView) itemView.findViewById(R.id.price_show_item);
-
+           //设置点击事件
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent in=new Intent(context, ShopActivity.class);
+                    in.putExtra("url",url);
+                    in.putExtra("position",getLayoutPosition());
+                    context.startActivity(in);
+                }
+            });
         }
     }
 }

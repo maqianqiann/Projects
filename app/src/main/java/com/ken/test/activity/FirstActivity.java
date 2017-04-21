@@ -1,6 +1,7 @@
 package com.ken.test.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
+
 
 import com.ken.test.R;
 import com.ken.test.fragment.FragmentBeatiful;
@@ -32,11 +35,21 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
     private FragmentBeatiful f_bea;
     private FragmentCar f_car;
     private FragmentMe f_me;
+    private int position;
+    public static String name;
+    private RadioButton show;
+    private RadioButton lei;
+    private RadioButton good;
+    private RadioButton car;
+    private RadioButton my;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frist_layout);
+        Intent intent = getIntent();
+        position = intent.getIntExtra("car",0);
+
         //初始化控件
         initViews();
     }
@@ -45,17 +58,20 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
        /* ImageView message= (ImageView) findViewById(R.id.message_im_first);
         ImageView ch_im= (ImageView) findViewById(R.id.ch_im_first);*/
         frameLayout = (FrameLayout) findViewById(R.id.frame_first);
-        TextView car = (TextView) findViewById(R.id.ca);
-        TextView s = (TextView) findViewById(R.id.s);
-        TextView m = (TextView) findViewById(R.id.m);
-        TextView f = (TextView) findViewById(R.id.f);
-        TextView wo = (TextView) findViewById(R.id.w);
-        car.setOnClickListener(this);
-        s.setOnClickListener(this);
-        m.setOnClickListener(this);
-        f.setOnClickListener(this);
-        wo.setOnClickListener(this);
 
+        show = (RadioButton) findViewById(R.id.home_page);
+        lei = (RadioButton) findViewById(R.id.classify);
+        good = (RadioButton) findViewById(R.id.good);
+        car = (RadioButton) findViewById(R.id.shop);
+        my = (RadioButton) findViewById(R.id.my);
+
+
+        show.setOnClickListener(this);
+        lei.setOnClickListener(this);
+        good.setOnClickListener(this);
+        car.setOnClickListener(this);
+        my.setOnClickListener(this);
+         show.setSelected(true);
 
 
 
@@ -82,6 +98,12 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
         beginTransaction.hide(f_me);
         beginTransaction.commit();
 
+        //判断car的数字
+        if(position==3){
+            showAndHide(f_car,f_bea,f_me,f_style,f_show);
+        }else if (position==4){
+            showAndHide(f_me,f_show,f_style,f_bea,f_car);
+        }
 
     }
     //写个方法控制显示和隐藏
@@ -99,25 +121,64 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.s:
+            case R.id.home_page:
                 showAndHide(f_show,f_style,f_bea,f_car,f_me);
+                show.setSelected(true);
+                lei.setSelected(false);
+                good.setSelected(false);
+                car.setSelected(false);
+                my.setSelected(false);
+
+
+
                 break;
-            case R.id.f:
+            case R.id.classify:
                 showAndHide(f_style,f_show,f_bea,f_car,f_me);
-
+                show.setSelected(false);
+                lei.setSelected(true);
+                good.setSelected(false);
+                car.setSelected(false);
+                my.setSelected(false);
                 break;
-            case R.id.m:
+            case R.id.good:
                 showAndHide(f_bea,f_show,f_style,f_car,f_me);
-
+                show.setSelected(false);
+                lei.setSelected(false);
+                good.setSelected(true);
+                car.setSelected(false);
+                my.setSelected(false);
                 break;
-            case R.id.ca:
+            case R.id.shop:
+                //判断登陆的状态
+                boolean state = LogActivity.state;
+                if(!state){
+                    Intent in=new Intent(FirstActivity.this,LogActivity.class);
+                    startActivity(in);
+
+                }
                 showAndHide(f_car,f_show,f_style,f_bea,f_me);
-
+                car.setSelected(true);
+                lei.setSelected(false);
+                good.setSelected(false);
+                show.setSelected(false);
+                my.setSelected(false);
                 break;
-            case R.id.w:
+            case R.id.my:
                 showAndHide(f_me,f_show,f_style,f_bea,f_car);
-
+                my.setSelected(true);
+                lei.setSelected(false);
+                good.setSelected(false);
+                car.setSelected(false);
+                show.setSelected(false);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0&&resultCode==10){
+            name = data.getStringExtra("name");
         }
     }
 }

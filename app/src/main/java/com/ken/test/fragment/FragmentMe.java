@@ -35,6 +35,11 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         log = (Button) view.findViewById(R.id.wo_log);
+        log.setOnClickListener(this);
+        String name=FirstActivity.name;
+        if(name!=null){
+            log.setText(name);
+        }
 
 
     }
@@ -49,5 +54,15 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
                 break;
 
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0&&resultCode==10){
+            String name= data.getStringExtra("name");
+            log.setText(name);
+        }
+
     }
 }

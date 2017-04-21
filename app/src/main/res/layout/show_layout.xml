@@ -126,6 +126,14 @@
 
            android:background="#DCDCDC"
            ></com.ken.test.view.InnerGridView>
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="查看更多的商品"
+           android:gravity="center"
+           android:id="@+id/good_more_show_c"
+           />
+
    </LinearLayout>
 
 

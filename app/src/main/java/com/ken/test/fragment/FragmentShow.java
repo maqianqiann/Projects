@@ -1,5 +1,6 @@
 package com.ken.test.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.ken.test.R;
 import com.ken.test.activity.FirstActivity;
+import com.ken.test.activity.MoreActivity;
 import com.ken.test.adapter.MyAdaprer;
 
 import com.ken.test.adapter.MyGridAdapter;
@@ -49,6 +51,7 @@ public class FragmentShow extends Fragment {
     private RecyclerView rv_show;
     private ListView listView;
     private InnerGridView gridView;
+    private TextView more;
 
 
     @Nullable
@@ -67,7 +70,7 @@ public class FragmentShow extends Fragment {
         banner = (Banner) view.findViewById(R.id.banner_show_fragment);
         rv_show = (RecyclerView) view.findViewById(R.id.rv_show_c);
         listView = (ListView) view.findViewById(R.id.lv_show_c);
-
+        more = (TextView) view.findViewById(R.id.good_more_show_c);
 
 
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity,FullyLinearLayoutManager.HORIZONTAL,false);
@@ -79,6 +82,14 @@ public class FragmentShow extends Fragment {
         banner.setImageLoader(new GlideImageLoader());
         //解析数据
         getDatas();
+
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(activity,MoreActivity.class);
+                startActivityForResult(in,1);
+            }
+        });
 
     }
 
@@ -122,4 +133,8 @@ public class FragmentShow extends Fragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

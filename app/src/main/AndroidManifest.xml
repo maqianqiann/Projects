@@ -20,6 +20,10 @@
         <activity android:name=".activity.InfoActivity"/>
         <activity android:name=".activity.GongInfoActivity"/>
         <activity android:name=".activity.LogActivity"/>
+        <activity android:name=".activity.MoreActivity"/>
+        <activity android:name=".activity.ShopActivity"/>
+        <activity android:name=".activity.RegActivity"/>
+        <activity android:name=".activity.CastActivity"/>
     </application>
 
 </manifest>

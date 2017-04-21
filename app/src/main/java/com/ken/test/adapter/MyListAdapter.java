@@ -1,6 +1,7 @@
 package com.ken.test.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ken.test.R;
 
+import com.ken.test.activity.ShopActivity;
 import com.ken.test.bean.FirstBean;
 import com.ken.test.view.FullyLinearLayoutManager;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +29,7 @@ public class MyListAdapter extends BaseAdapter {
     private Context context;
     private List<FirstBean.DataBean.SubjectsBean> subjects;
     private RecyclerView rv_show_two;
+    private String url="http://m.yunifang.com/yunifang/mobile/home?random=84831&encode=9dd34239798e8cb22bf99a75d1882447";
 
     public MyListAdapter(Context context, List<FirstBean.DataBean.SubjectsBean> subjects) {
         this.context=context;
@@ -64,7 +69,7 @@ public class MyListAdapter extends BaseAdapter {
 
         final List<FirstBean.DataBean.SubjectsBean.GoodsListBean> goodsList = subjects.get(position).getGoodsList();
         //设置适配器
-        rv_show_two.setAdapter(new MyAdapterTwo(context,goodsList));
+         rv_show_two.setAdapter(new MyAdapterTwo(context, (ArrayList<FirstBean.DataBean.SubjectsBean.GoodsListBean>) goodsList));
 
         return convertView;
     }
@@ -73,10 +78,11 @@ public class MyListAdapter extends BaseAdapter {
         private Context context;
         private List<FirstBean.DataBean.SubjectsBean.GoodsListBean> goodsList;
 
-        public MyAdapterTwo(Context context, List<FirstBean.DataBean.SubjectsBean.GoodsListBean> goodsList) {
+        public MyAdapterTwo(Context context, ArrayList<FirstBean.DataBean.SubjectsBean.GoodsListBean> goodsList) {
             this.context=context;
             this.goodsList=goodsList;
         }
+
         @Override
         public ViewHolderTwo onCreateViewHolder(ViewGroup parent, int viewType) {
             View view=View.inflate(context,R.layout.item_show_two,null);
@@ -86,11 +92,10 @@ public class MyListAdapter extends BaseAdapter {
 
         @Override
         public void onBindViewHolder(ViewHolderTwo holder, int position) {
-               holder.title.setText(goodsList.get(position).getEfficacy());
+             holder.title.setText(goodsList.get(position).getEfficacy());
              Glide.with(context).load(goodsList.get(position).getGoods_img()).into(holder.im);
             holder.desc.setText(goodsList.get(position).getGoods_name());
             holder.price.setText(goodsList.get(position).getMarket_price()+"￥");
-
         }
 
         @Override
@@ -111,7 +116,16 @@ public class MyListAdapter extends BaseAdapter {
                 im = (ImageView) itemView.findViewById(R.id.image_show_tt);
                 desc = (TextView) itemView.findViewById(R.id.desc_show_tt);
                 price = (TextView) itemView.findViewById(R.id.price_show_tt);
-
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent in=new Intent(context, ShopActivity.class);
+                        in.putExtra("lists",(Serializable)goodsList);
+                        in.putExtra("position",getLayoutPosition());
+                        in.putExtra("lei",5);
+                        context.startActivity(in);
+                    }
+                });
               }
           }
     }
