@@ -61,6 +61,7 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
     private GouwucheBean bean;
     private MyAdapter adapter;
 
+    private double money=0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -82,8 +83,13 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
 
         //获得全选的框
         cb_all = (CheckBox) view.findViewById(R.id.f3_box);
+        cb_all.setOnClickListener(this);
+
         price_all = (TextView) view.findViewById(R.id.f3_price);
+
         js_all = (TextView) view.findViewById(R.id.f3_jiesuan);
+        js_all.setOnClickListener(this);
+
         listView = (ListView) view.findViewById(R.id.f3_listView_car);
 
         guang.setOnClickListener(new View.OnClickListener() {
@@ -112,12 +118,24 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 if(cartItemList1!=null){
-                    for (int i = 0; i <cartItemList1.size() ; i++) {
-                        cartItemList1.get(i).setFlag(true);
-                        adapter.notifyDataSetChanged();//刷新适配器
+                    boolean checked = ((CheckBox) v).isChecked();
+                    if(checked){
+                        for (int i = 0; i <cartItemList1.size() ; i++) {
+                            cartItemList1.get(i).setFlag(checked);
+                            adapter.notifyDataSetChanged();//刷新适配器
+                            double parseInt = Double.parseDouble(cartItemList1.get(i).getPrice());
+                            int count = cartItemList1.get(i).getCount();
+                            money+= parseInt*count ;
+                        }
+                    }else if(!checked){
+                        for (int i = 0; i <cartItemList1.size() ; i++) {
+                            cartItemList1.get(i).setFlag(false);
+                            adapter.notifyDataSetChanged();//刷新适配器
+                        }
+                        money=0;
                     }
-                }
-
+                }//计算钱数
+                price_all.setText(money+"￥");
             }
         });
    }
@@ -126,23 +144,9 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         if(LogActivity.state==true){
-            questDatas(64);
+            //再次调用请求的方法
+                questDatas(64);
         }
-
-    }
-
-    public boolean setSelect(){
-    /*    Set<Map.Entry<String, Boolean>> set = map.entrySet();
-        Iterator<Map.Entry<String, Boolean>> iterator = set.iterator();
-        while (iterator.hasNext()){
-            Map.Entry<String, Boolean> next = iterator.next();
-            if(!next.getValue()){
-                //如果有一个为false则all就为false
-                return false;
-
-            }
-        }*/
-        return true;
     }
 
     //写个请求的方法
@@ -163,10 +167,19 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
                         if(cartItemList1!=null){
                             rel_car1.setVisibility(View.GONE);
                             rel_car2.setVisibility(View.VISIBLE);
+                             //遍历集合
+                            for (int i = 0; i <cartItemList1.size() ; i++) {
+                                cartItemList1.get(i).setFlag(false);//设置状态
+
+                            }
+                            //拿到价格的总数
+
                             //设置数据
                             adapter = new MyAdapter(cartItemList1);
                             listView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
+
+
                         }
                     }
                 });
@@ -213,20 +226,52 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
             ImageView im= (ImageView) convertView.findViewById(R.id.im_car_list);
             TextView title= (TextView) convertView.findViewById(R.id.title_car_list);
             TextView price= (TextView) convertView.findViewById(R.id.price_car_list);
+            TextView num= (TextView) convertView.findViewById(R.id.num_car_list);
             CheckBox cb= (CheckBox) convertView.findViewById(R.id.cb_car_list);
 
             //设置数据
             title.setText(cartItemList.get(position).getName());
             price.setText(cartItemList.get(position).getPrice()+"￥");
             Glide.with(activity).load(cartItemList.get(position).getPic()).into(im);
-            cb.setChecked(cartItemList1.get(position).getFlag());
-
+            cb.setChecked(cartItemList.get(position).getFlag());
+           num.setText(cartItemList.get(position).getCount()+"");
             //设置点击事件
             cb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   cartItemList.get(position).setFlag(true);
+                    //获得当前的状态设为相反的状态
+                  //  boolean aBoolean = ((CheckBox) v).isChecked();
+                   Boolean aBoolean = cartItemList.get(position).getFlag();
+                    cartItemList.get(position).setFlag(!aBoolean);
+                  //  adapter.notifyDataSetChanged();//刷新
+
+                    if(aBoolean=true){
+                        double parseInt = Double.parseDouble(cartItemList1.get(position).getPrice());
+                        int count = cartItemList1.get(position).getCount();
+                        money+= (parseInt*count) ;
+                        Log.i("xxxxxx",money+"");
+                        price_all.setText(money+"");
+                    }if(aBoolean=false){
+                        double parseInt = Double.parseDouble(cartItemList1.get(position).getPrice());
+                        int count = cartItemList1.get(position).getCount();
+                        money-= (parseInt*count) ;
+                        price_all.setText(money+"");
+                    }
                     adapter.notifyDataSetChanged();
+
+                    boolean Boolean_flag=true;
+                    for (int i = 0; i <cartItemList.size(); i++) {
+                        Boolean ba = cartItemList.get(i).getFlag();
+                        if(!ba){
+                            //如果有一个为false都为false
+                            Boolean_flag=false;
+                            cb_all.setChecked(false);
+                        }
+                    }
+                    if(Boolean_flag){
+                       cb_all.setChecked(Boolean_flag);
+                       adapter.notifyDataSetChanged();
+                    }
                 }
             });
 
