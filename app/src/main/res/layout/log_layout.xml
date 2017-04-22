@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+<include
+    layout="@layout/include"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#dddedd"
+        >
+        <LinearLayout
+
+            android:layout_marginTop="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+
+            android:background="@drawable/log_shape"
+            >
+
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+    >
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="御泥坊账号登陆"
+        android:textSize="18sp"
+        android:textColor="@drawable/selector_z"
+        android:gravity="center"
+        android:id="@+id/log_ynf_text"
+        android:background="@drawable/selector_b"
+
+        />
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:textColor="@drawable/selector_z"
+        android:id="@+id/log_phone_text"
+        android:text="手机快速登录"
+        android:textSize="18sp"
+         android:gravity="center"
+
+        android:background="@drawable/selector_b"
+
+        />
+
+</LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/log_shape"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:hint="账户：不少于6位"
+            android:id="@+id/log_name_text"
+            android:digits="0123456789abcdefghijklmnopqrstuvwsyz"
+            android:maxLength="11"
+            />
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/log_shape"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="密码：数字或字母"
+            android:id="@+id/log_pwd_text"
+            android:digits="0123456789abcdefghijklmnopqrstuvwsyz"
+            android:inputType="textPassword"
+            />
+        <TextView
+             android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+           android:layout_marginLeft="35dp"
+
+            android:text="忘记密码"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:background="#dddedd"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/log_r_shape"
+            android:text="登录"
+            android:textColor="#fff"
+            android:id="@+id/log_button"
+
+            />
+         <View
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorMain"
+            android:text="第三方快速登录"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

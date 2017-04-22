@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<include
+    layout="@layout/include"/>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="默认排序"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:gravity="center"
+            android:id="@+id/more_mo"
+            android:textColor="#f40808"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="价格升序"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:id="@+id/more_she"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="价格降序"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:id="@+id/more_jia"
+            />
+
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/more_frame"
+        ></FrameLayout>
+
+</LinearLayout>
