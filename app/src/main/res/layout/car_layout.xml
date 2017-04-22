@@ -16,13 +16,13 @@
             android:orientation="vertical"
             >
 
-            <ListView
+            <com.ken.test.view.QQListView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:id="@+id/f3_listView_car">
 
-            </ListView>
+            </com.ken.test.view.QQListView>
 
             <LinearLayout
                 android:padding="10dp"

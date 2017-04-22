@@ -34,4 +34,5 @@ dependencies {
     compile 'com.android.support:design:23.2.0'
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile files('libs/BaiduLBS_Android.jar')
 }

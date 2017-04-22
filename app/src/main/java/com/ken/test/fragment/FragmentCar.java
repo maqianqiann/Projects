@@ -9,12 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,16 +24,13 @@ import com.ken.test.activity.FirstActivity;
 import com.ken.test.activity.LogActivity;
 import com.ken.test.bean.GoodsBean;
 import com.ken.test.bean.GouwucheBean;
-import com.ken.test.view.InnerListView;
+import com.ken.test.view.QQListView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -50,7 +45,7 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
     private CheckBox cb_all;
     private TextView price_all;
     private TextView js_all;
-    private ListView listView;
+    private QQListView listView;
 
     private Map<String, Boolean> map;
     private List<GoodsBean.CartItemListBean> list;
@@ -90,7 +85,7 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
         js_all = (TextView) view.findViewById(R.id.f3_jiesuan);
         js_all.setOnClickListener(this);
 
-        listView = (ListView) view.findViewById(R.id.f3_listView_car);
+        listView = (QQListView) view.findViewById(R.id.f3_listView_car);
 
         guang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,6 +222,7 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
             TextView title= (TextView) convertView.findViewById(R.id.title_car_list);
             TextView price= (TextView) convertView.findViewById(R.id.price_car_list);
             TextView num= (TextView) convertView.findViewById(R.id.num_car_list);
+            TextView delete= (TextView) convertView.findViewById(R.id.delete);
             CheckBox cb= (CheckBox) convertView.findViewById(R.id.cb_car_list);
 
             //设置数据
@@ -272,6 +268,15 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
                        cb_all.setChecked(Boolean_flag);
                        adapter.notifyDataSetChanged();
                     }
+                }
+            });
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cartItemList.remove(position);
+                    notifyDataSetChanged();
+                    listView.turnToNormal();
                 }
             });
 

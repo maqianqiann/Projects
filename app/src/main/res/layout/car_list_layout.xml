@@ -1,71 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<CheckBox
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/cb_car_list"
-    android:layout_marginTop="50dp"
-    android:layout_marginLeft="20dp"
-    android:button="@drawable/select_checkbox"
-    android:focusable="false"
-    />
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@mipmap/ic_launcher"
-        android:id="@+id/im_car_list"
-        />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:layout_marginTop="20dp"
-            android:id="@+id/title_car_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="12dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"/>
+
+        <CheckBox
+            android:id="@+id/cb_car_list"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="内容"
-            android:layout_weight="1"
-            android:textSize="18sp"
-            />
+            android:layout_height="160dp"
+            android:button="@drawable/select_checkbox"
+            android:focusable="false"
+            android:gravity="center"/>
+
+        <ImageView
+            android:id="@+id/im_car_list"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@mipmap/ic_launcher"/>
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/price_car_list"
-                android:text="价格"
-                android:textColor="@color/colorMain"
-                />
-            <TextView
+                android:id="@+id/title_car_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/num_car_list"
-                android:text="数量"
-                android:layout_marginLeft="30dp"
-                android:textColor="@color/colorMain"
-                />
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/coupons"
-                android:layout_marginLeft="120dp"
-                />
+                android:text="清爽平衡矿物质"
+                android:textSize="17sp"
+                android:layout_marginTop="40dp"
+                android:textColor="#353434"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/price_car_list"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="￥ 160.00"
+                    android:textColor="#FC6B87"
+                    android:layout_marginBottom="3dp"/>
+                <TextView
+                    android:id="@+id/num_car_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:text="数量：4"/>
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@mipmap/coupons"
+                    />
+            </LinearLayout>
         </LinearLayout>
-
-
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="#FFFF0000"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:textColor="@android:color/white"
+        android:paddingRight="20dp"
+        android:text="删除" />
 </LinearLayout>
