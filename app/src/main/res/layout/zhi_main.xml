@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e2e2de">
+    android:background="#e2e2de"
+
+    >
     <LinearLayout
         android:background="#ffffff"
         android:layout_width="match_parent"
@@ -26,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="确认订单"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_marginTop="10dp"
         android:background="#fff"
@@ -45,6 +48,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textSize="18dp"
+            android:id="@+id/zhi_address"
             android:text="请添加收货地址"/>
         <ImageView
             android:layout_width="wrap_content"
@@ -52,72 +56,75 @@
             android:src="@mipmap/you"
             android:padding="10dp"/>
     </LinearLayout>
+    <ListView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/zhi_lv"
+        ></ListView>
     <LinearLayout
-        android:background="#fff"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:id="@+id/z_pic"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/z_pirce"
-                    android:textColor="@color/colorMain"
-                    android:padding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="￥ 99.9"/>
-                <TextView
-                    android:id="@+id/z_name"
-                    android:padding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="首都华盛顿就开始"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:text="配送方式"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:padding="10dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="商品数量"/>
-            <Button
-                android:id="@+id/z_jian"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-            <TextView
-                android:layout_marginLeft="10dp"
-                android:id="@+id/z_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="  1  "/>
-            <Button
-                android:layout_marginLeft="10dp"
-                android:id="@+id/z_jia"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:text="+"/>
+            android:text="包邮"
 
-        </LinearLayout>
+            />
+    </LinearLayout>
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="给卖家留言"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="支付方式:"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/aliplay_allshare_normal"
+        />
+    <TextView
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="支付宝"
+        />
+</LinearLayout>
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        >
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/weixin_allshare_normal"
+            />
+        <TextView
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信"
+            />
     </LinearLayout>
 </LinearLayout>

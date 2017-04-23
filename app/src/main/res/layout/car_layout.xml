@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:id="@+id/rel_car2"
-         android:visibility="gone"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -90,6 +90,7 @@
                         android:layout_height="50dp"
                         android:text="结算"
                         android:textSize="18dp"
+                        android:textColor="#fff"
 
                         />
                 </LinearLayout>

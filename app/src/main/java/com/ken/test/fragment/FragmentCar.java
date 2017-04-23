@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -22,12 +23,14 @@ import com.ken.test.R;
 import com.ken.test.activity.CastActivity;
 import com.ken.test.activity.FirstActivity;
 import com.ken.test.activity.LogActivity;
+import com.ken.test.bean.DingBean;
 import com.ken.test.bean.GoodsBean;
 import com.ken.test.bean.GouwucheBean;
 import com.ken.test.view.QQListView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +58,7 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
     private ArrayList<GouwucheBean.CartItemList> cartItemList1;
     private GouwucheBean bean;
     private MyAdapter adapter;
-
+    private ArrayList<DingBean> listd;//这是订单的集合
     private double money=0;
     @Nullable
     @Override
@@ -118,7 +121,7 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
                         for (int i = 0; i <cartItemList1.size() ; i++) {
                             cartItemList1.get(i).setFlag(checked);
                             adapter.notifyDataSetChanged();//刷新适配器
-                            double parseInt = Double.parseDouble(cartItemList1.get(i).getPrice());
+                            double parseInt = Double.parseDouble(cartItemList1.get(i).getPrice())*100/100d;
                             int count = cartItemList1.get(i).getCount();
                             money+= parseInt*count ;
                         }
@@ -185,9 +188,30 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.f3_jiesuan:
+                //将选中的内容传过去
+                if(cartItemList1!=null){
+                    listd=new ArrayList<>();
+                    for (int i = 0; i <cartItemList1.size() ; i++) {
+                    if(cartItemList1.get(i).getFlag()){
+                        //将数据装到集合中传入
+                        DingBean bean=new DingBean();
+                        bean.title=cartItemList1.get(i).getName();
+                        bean.price=Double.parseDouble(cartItemList1.get(i).getPrice());
+                        bean.im=cartItemList1.get(i).getPic();
+                        bean.id=cartItemList1.get(i).getCount();
+                        listd.add(bean);
+                    }
+                    }
+                }
                 Intent in=new Intent(activity, CastActivity.class);
-                //将订单信息传过去
-                startActivity(in);
+                if(listd.size()!=0){
+                    in.putExtra("listd",(Serializable)listd);
+                    //将订单信息传过去
+                    startActivity(in);
+
+                }else{
+                    Toast.makeText(activity, "您还没有选择您购买的商品~", Toast.LENGTH_SHORT).show();
+                }
 
                 break;
 
@@ -236,19 +260,17 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
                 @Override
                 public void onClick(View v) {
                     //获得当前的状态设为相反的状态
-                  //  boolean aBoolean = ((CheckBox) v).isChecked();
-                   Boolean aBoolean = cartItemList.get(position).getFlag();
+                    Boolean aBoolean = cartItemList.get(position).getFlag();
                     cartItemList.get(position).setFlag(!aBoolean);
-                  //  adapter.notifyDataSetChanged();//刷新
-
-                    if(aBoolean=true){
-                        double parseInt = Double.parseDouble(cartItemList1.get(position).getPrice());
+                    Boolean flag = cartItemList.get(position).getFlag();
+                    adapter.notifyDataSetChanged();//刷新
+                    if(flag){
+                        double parseInt = Double.parseDouble(cartItemList1.get(position).getPrice())*100/100d;
                         int count = cartItemList1.get(position).getCount();
                         money+= (parseInt*count) ;
-                        Log.i("xxxxxx",money+"");
                         price_all.setText(money+"");
-                    }if(aBoolean=false){
-                        double parseInt = Double.parseDouble(cartItemList1.get(position).getPrice());
+                    }if(!flag){
+                        double parseInt = Double.parseDouble(cartItemList1.get(position).getPrice())*100/100d;
                         int count = cartItemList1.get(position).getCount();
                         money-= (parseInt*count) ;
                         price_all.setText(money+"");

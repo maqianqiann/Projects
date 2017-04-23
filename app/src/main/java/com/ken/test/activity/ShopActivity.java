@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.ken.test.R;
+import com.ken.test.bean.DingBean;
 import com.ken.test.bean.FirstBean;
 import com.ken.test.bean.GongBean;
 import com.ken.test.bean.GoodsBean;
@@ -27,6 +28,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +63,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     private String name_n;
     private double price_n;
     private int number=1;
+    private ArrayList<DingBean> listd=new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,6 +104,12 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             pic_u = arrayList.get(position).getGoods_img();
             price_u = arrayList.get(position).getMarket_price();
             name_u = arrayList.get(position).getEfficacy();
+            DingBean ding=new DingBean();
+            ding.id=64;
+            ding.im=pic_u;
+            ding.price=price_u;
+            ding.title=name_u;
+            listd.add(ding);
 
             Glide.with(ShopActivity.this).load(arrayList.get(position).getGoods_img()).into(good_im);
             price_z.setText(arrayList.get(position).getMarket_price()+"￥");
@@ -117,6 +126,12 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             name_n = list.get(position).getEfficacy();
             price_n = list.get(position).getMarket_price();
 
+            DingBean ding=new DingBean();
+            ding.id=64;
+            ding.im=pic_n;
+            ding.price=price_n;
+            ding.title=name_n;
+            listd.add(ding);
             Glide.with(ShopActivity.this).load(list.get(position).getGoods_img()).into(good_im);
         price_z.setText(list.get(position).getMarket_price()+"￥");
         price_f.setText(list.get(position).getShop_price()+"￥");
@@ -150,6 +165,12 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
                 pic = list.get(0).getGoodsList().get(position).getGoods_img();
                 price = list.get(0).getGoodsList().get(position).getMarket_price();
                 name = list.get(0).getGoodsList().get(position).getEfficacy();
+                DingBean ding=new DingBean();
+                ding.id=64;
+                ding.im=pic;
+                ding.price=price;
+                ding.title=name;
+                listd.add(ding);
 
                 Glide.with(ShopActivity.this).load(list.get(0).getGoodsList().get(position).getGoods_img()).into(good_im);
                 price_z.setText(list.get(0).getGoodsList().get(position).getMarket_price()+"￥");
@@ -189,6 +210,16 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.shang_mai:
                 if(LogActivity.state) {
                     Intent intent = new Intent(this, CastActivity.class);
+                    //传值，将购买的订单传过去
+                    if(url!=null&&listd!=null){
+                       intent.putExtra("listd",(Serializable)listd);
+
+                    }else if(lei==5&&arrayList!=null&&listd!=null){
+                        intent.putExtra("listd",(Serializable)listd);
+                    }else if(listd!=null){
+                        intent.putExtra("listd",(Serializable)listd);
+
+                    }
                     startActivity(intent);
                     finish();
                 }else {

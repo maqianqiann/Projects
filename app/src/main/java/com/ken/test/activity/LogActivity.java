@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,8 +47,9 @@ public class LogActivity extends AppCompatActivity implements View.OnClickListen
 
     private void initViews() {
         TextView zc= (TextView) findViewById(R.id.include_zc);
-        zc.setOnClickListener(this);
-
+        zc.setOnClickListener(this);//注册
+        ImageView im= (ImageView) findViewById(R.id.include_im);
+        im.setOnClickListener(this);
         log_button = (Button) findViewById(R.id.log_button);
         ynf_text = (TextView) findViewById(R.id.log_ynf_text);
         phone_text = (TextView) findViewById(R.id.log_phone_text);
@@ -95,7 +97,9 @@ public class LogActivity extends AppCompatActivity implements View.OnClickListen
                 Intent in=new Intent(LogActivity.this,RegActivity.class);
                 startActivityForResult(in,20);
                 break;
-
+            case R.id.include_im:
+                finish();
+                break;
 
         }
     }
