@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,8 +16,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ken.test.R;
 import com.ken.test.bean.DingBean;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by lenovo on 2017/4/21.
@@ -27,6 +33,7 @@ public class CastActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<DingBean> list;
     private int number=1;
     private TextView address;
+    private Button button_sure;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +49,8 @@ public class CastActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
        ImageView dw_im= (ImageView) findViewById(R.id.zhi_dw);
        final ImageView fan_im= (ImageView) findViewById(R.id.zhi_fan);
+        button_sure = (Button) findViewById(R.id.button_sure);
+        button_sure.setOnClickListener(this);
         dw_im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +83,44 @@ public class CastActivity extends AppCompatActivity implements View.OnClickListe
                 Intent in=new Intent(CastActivity.this,AddressActivity.class);
                 startActivityForResult(in,111);
                 break;
+            case R.id.button_sure:
+                //设置
+               postDatas();
+                break;
         }
+
+    }
+
+    private void postDatas() {
+        //进行与后台交互，将参数封装到post方法中进行与后台交互，生产一个预定订单的信息返回
+        AsyncHttpClient client=new AsyncHttpClient();
+        String url="http://lexue365.51dangao.cn/api/order/add_order";
+        client.addHeader("userid",465+"");
+        client.addHeader("cltid", "1");
+        client.addHeader("token", "bbb6e99c4cd22930ea4c945d9932f98a");
+        client.addHeader("mobile", "15718812708");
+
+        RequestParams params = new RequestParams();
+        params.put("activity_id",4);
+        params.put("time_id",2927);
+        params.put("child_num",1);
+
+        params.put("contact","马倩");
+        params.put("mobile","15718812708");
+        params.put("remark",1);
+        client.post(getApplicationContext(), url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.i("xxx",responseString);
+
+            }
+        });
+   /*     Intent in=new Intent(CastActivity.this,SureDingActivity.class);
+
+        startActivity(in);//跳转到选择支付方式的界面*/
 
     }
 

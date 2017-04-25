@@ -96,35 +96,18 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@mipmap/aliplay_allshare_normal"
-        />
-    <TextView
-        android:layout_margin="20dp"
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_weight="1"/>
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="支付宝"
-        />
-</LinearLayout>
+        android:text="确认订单"
+        android:id="@+id/button_sure"
+        android:background="@drawable/log_r_shape"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        >
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/weixin_allshare_normal"
-            />
-        <TextView
-            android:layout_margin="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="微信"
-            />
-    </LinearLayout>
+        />
+
+</LinearLayout>
 </LinearLayout>

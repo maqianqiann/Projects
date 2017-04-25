@@ -1,6 +1,8 @@
 package com.ken.test.app;
 
 import android.app.Application;
+import android.os.Build;
+import android.view.View;
 
 import com.baidu.mapapi.SDKInitializer;
 
@@ -13,5 +15,8 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         SDKInitializer.initialize(getApplicationContext());
+
     }
+
 }
+
