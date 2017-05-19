@@ -59,7 +59,7 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
     private GouwucheBean bean;
     private MyAdapter adapter;
     private ArrayList<DingBean> listd;//这是订单的集合
-    private double money=0;
+    private float money=0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -121,9 +121,10 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
                         for (int i = 0; i <cartItemList1.size() ; i++) {
                             cartItemList1.get(i).setFlag(checked);
                             adapter.notifyDataSetChanged();//刷新适配器
-                            double parseInt = Double.parseDouble(cartItemList1.get(i).getPrice())*100/100d;
+                            float parseInt = Float.parseFloat(cartItemList1.get(i).getPrice())*100;
+                            float v1 = parseInt / 100f;
                             int count = cartItemList1.get(i).getCount();
-                            money+= parseInt*count ;
+                            money+= v1*count ;
                         }
                     }else if(!checked){
                         for (int i = 0; i <cartItemList1.size() ; i++) {
@@ -206,15 +207,13 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
                 Intent in=new Intent(activity, CastActivity.class);
                 if(listd.size()!=0){
                     in.putExtra("listd",(Serializable)listd);
-                    //将订单信息传过去
+                    //将商品信息传过去
                     startActivity(in);
 
                 }else{
                     Toast.makeText(activity, "您还没有选择您购买的商品~", Toast.LENGTH_SHORT).show();
                 }
-
                 break;
-
         }
     }
 
@@ -240,7 +239,7 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
         }
 
         @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, final ViewGroup parent) {
             convertView=View.inflate(activity,R.layout.car_list_layout,null);
             ImageView im= (ImageView) convertView.findViewById(R.id.im_car_list);
             TextView title= (TextView) convertView.findViewById(R.id.title_car_list);
@@ -265,14 +264,19 @@ public class FragmentCar extends Fragment implements View.OnClickListener{
                     Boolean flag = cartItemList.get(position).getFlag();
                     adapter.notifyDataSetChanged();//刷新
                     if(flag){
-                        double parseInt = Double.parseDouble(cartItemList1.get(position).getPrice())*100/100d;
+                        float parseInt = Float.parseFloat(cartItemList1.get(position).getPrice())*100;
+                        int a= (int) parseInt;
+                        float ab= a/100f;
                         int count = cartItemList1.get(position).getCount();
-                        money+= (parseInt*count) ;
+                        money+= (ab*count) ;
                         price_all.setText(money+"");
                     }if(!flag){
-                        double parseInt = Double.parseDouble(cartItemList1.get(position).getPrice())*100/100d;
+
+                        float parseInt = Float.parseFloat(cartItemList1.get(position).getPrice())*100;
+                        int a= (int) parseInt;
+                        float ab= a/100f;
                         int count = cartItemList1.get(position).getCount();
-                        money-= (parseInt*count) ;
+                        money-= (ab*count) ;
                         price_all.setText(money+"");
                     }
                     adapter.notifyDataSetChanged();

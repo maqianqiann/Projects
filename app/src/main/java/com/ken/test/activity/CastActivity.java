@@ -14,11 +14,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ken.test.R;
 import com.ken.test.bean.DingBean;
+import com.ken.test.bean.YuDingBean;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -34,7 +38,8 @@ public class CastActivity extends AppCompatActivity implements View.OnClickListe
     private int number=1;
     private TextView address;
     private Button button_sure;
-
+    private String order_sn;
+    private String names;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +48,6 @@ public class CastActivity extends AppCompatActivity implements View.OnClickListe
         list = (ArrayList<DingBean>) intent.getSerializableExtra("listd");
         //初始化界面
         initViews();
-
     }
 
     private void initViews() {
@@ -90,9 +94,9 @@ public class CastActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
+    //第一次与后台交互
     private void postDatas() {
-        //进行与后台交互，将参数封装到post方法中进行与后台交互，生产一个预定订单的信息返回
+        //进行与后台交互，将参数封装到post方法中进行与后台交互，生成预支付订单的信息返回
         AsyncHttpClient client=new AsyncHttpClient();
         String url="http://lexue365.51dangao.cn/api/order/add_order";
         client.addHeader("userid",465+"");
@@ -105,22 +109,29 @@ public class CastActivity extends AppCompatActivity implements View.OnClickListe
         params.put("time_id",2927);
         params.put("child_num",1);
 
-        params.put("contact","马倩");
+        params.put("contact",list.get(0).title);
         params.put("mobile","15718812708");
         params.put("remark",1);
         client.post(getApplicationContext(), url, params, new TextHttpResponseHandler() {
-            @Override
+
+           @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
             }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.i("xxx",responseString);
-
+                Gson gson=new Gson();
+                YuDingBean bean = gson.fromJson(responseString, YuDingBean.class);
+                //拿到订单号
+                order_sn = bean.getData().getOrder_sn();
+                names = bean.getData().getGoods_name();
             }
         });
-   /*     Intent in=new Intent(CastActivity.this,SureDingActivity.class);
+        Intent in=new Intent(CastActivity.this,SureDingActivity.class);
+        in.putExtra("order",order_sn);
+        in.putExtra("name",names);
+        startActivity(in);//跳转到选择支付方式的界面
 
-        startActivity(in);//跳转到选择支付方式的界面*/
 
     }
 

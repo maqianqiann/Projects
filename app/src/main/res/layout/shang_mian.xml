@@ -183,12 +183,12 @@
                        android:textColor="#ff00"/>
                </LinearLayout>
            </LinearLayout>
-    <!--       <ImageView
+        <ImageView
                android:layout_marginTop="10dp"
                android:scaleType="fitXY"
                android:layout_width="match_parent"
                android:layout_height="100dp"
-               android:src="@mipmap/bg_collocation_sale"/>-->
+               android:src="@drawable/bg_collocation_sale"/>
           <!-- <ImageView
                android:layout_marginTop="10dp"
                android:scaleType="fitXY"

@@ -22,7 +22,7 @@
             android:padding="10dp"
             android:textSize="18dp"
             android:gravity="center"
-            android:textColor="#26ff00"
+            android:textColor="@color/colorMain"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -56,12 +56,7 @@
             android:src="@mipmap/you"
             android:padding="10dp"/>
     </LinearLayout>
-    <ListView
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/zhi_lv"
-        ></ListView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,11 +76,21 @@
 
             />
     </LinearLayout>
-<EditText
+
+    <ListView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/zhi_lv"
+        ></ListView>
+
+    <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="给卖家留言"
-    />
+        android:textColor="@color/colorMain"
+        android:id="@+id/editText" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,6 +111,7 @@
         android:text="确认订单"
         android:id="@+id/button_sure"
         android:background="@drawable/log_r_shape"
+        android:layout_marginBottom="2dp"
 
         />
 

@@ -13,6 +13,9 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name=".app.MyApp"
         android:allowBackup="true"
@@ -32,8 +35,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity
+            android:name="com.ken.test.activity.H5PayDemoActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+
         <activity android:name=".activity.InfoActivity"/>
         <activity android:name=".activity.GongInfoActivity"/>
         <activity android:name=".activity.LogActivity"/>
@@ -45,6 +62,11 @@
         </activity>
         <activity android:name=".activity.AddressActivity"/>
         <activity android:name=".activity.SureDingActivity"/>
+
+        <activity android:name=".activity.PayDemoActivity"/>
+
+
+
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
         </service>
     </application>
